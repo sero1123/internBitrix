@@ -1,0 +1,2 @@
+User-Agent: *
+Sitemap: http://uchenik-test.6hi.ru/sitemap.xml
