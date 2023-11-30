@@ -1,4 +1,4 @@
-						<!-- <?CMax::checkRestartBuffer();?> -->
+						<?//CMax::checkRestartBuffer();?>
 						<?IncludeTemplateLangFile(__FILE__);?>
 							<?if(!$isIndex):?>
 								<?if($isHideLeftBlock && !$isWidePage):?>

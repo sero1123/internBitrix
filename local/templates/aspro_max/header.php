@@ -66,4 +66,4 @@ $bIndexBot = $bIncludedModule ? CMax::checkIndexBot() : false;?>
 									<div class="maxwidth-theme">
 								<?endif;?>
 						<?endif;?>
-						<?CMax::checkRestartBuffer();?>
+						<?//CMax::checkRestartBuffer();?>

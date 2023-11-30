@@ -380,8 +380,8 @@ else
 	"SEF_FOLDER" => "/catalog/",
 	"AJAX_MODE" => "N",
 	"AJAX_OPTION_JUMP" => "N",
-	"AJAX_OPTION_STYLE" => "Y",
-	"AJAX_OPTION_HISTORY" => "Y",
+	"AJAX_OPTION_STYLE" => "N",
+	"AJAX_OPTION_HISTORY" => "N",
 	"CACHE_TYPE" => "A",
 	"CACHE_TIME" => "3600000",
 	"CACHE_FILTER" => "Y",
@@ -1211,7 +1211,7 @@ $APPLICATION->SetTitle("Каталог");
 
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
-	".default", 
+	"main", 
 	$arrParametresIblock,
 	false
 );?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

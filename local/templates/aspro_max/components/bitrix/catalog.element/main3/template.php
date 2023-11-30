@@ -5,7 +5,14 @@
 <?use \Bitrix\Main\Localization\Loc;?>
 
 <div id='myBodyTest'>
+<?
+echo "<pre>";
+// print_r($arParams);
+// print_r($arResult);
 
+echo "</pre>";
+$_SESSION["params"] = $arParams;
+?>
 <div class="basket_props_block" id="bx_basket_div_<?=$arResult["ID"];?>" style="display: none;">
 	<?if (!empty($arResult['PRODUCT_PROPERTIES_FILL'])){
 		foreach ($arResult['PRODUCT_PROPERTIES_FILL'] as $propID => $propInfo){?>
@@ -1157,8 +1164,6 @@ $iCountProps = count($arResult['DISPLAY_PROPERTIES']) + $offerPropCount;
 								<?if($arResult['BRAND_ITEM']):?>
 									<div class="brand-detail">
 									?>
-									<div>тут есть мой текст</div>
-
 										<div class="brand-detail-info bordered rounded3">
 											<?if($arResult['BRAND_ITEM']["IMAGE"]):?>
 												<div class="brand-detail-info__image"><a href="<?=$arResult['BRAND_ITEM']["DETAIL_PAGE_URL"];?>"><img src="<?=$arResult['BRAND_ITEM']["IMAGE"]["src"];?>" alt="<?=$arResult['BRAND_ITEM']["NAME"];?>" title="<?=$arResult['BRAND_ITEM']["NAME"];?>" itemprop="image"></a></div>
@@ -1750,24 +1755,32 @@ if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' &
 				'SECTION_ID' => $arResult['SECTION']['ID'],
 				'ELEMENT_ID' => $arResult['ID'],
 			),
+
 			$component,
 			array("HIDE_ICONS" => "Y")
+			
 	);
 }
+
 ?>
 </div>
 </div>
 
+
+
+
+
 <script>
 	function replacementItem(urlItem){
+		urlItem = 'http://gunko.3jz.ru/catalog/elektronika/telefony/1077/'
 		console.log(urlItem);
 		$.ajax({
     url: urlItem,         /* Куда отправить запрос */
     method: 'get',             /* Метод запроса (post или get) */
-    dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */
-    data: {text: 'Текст'},     /* Данные передаваемые в массиве */
+    dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */    /* Данные передаваемые в массиве */
     success: function(data){   /* функция которая будет выполнена после успешного запроса.  */
 	     console.log(data);
+		 $("#myBodyTest").append(data)
 		//  $('#myBodyTest').empty()
 
 		//  $('#myBodyTest').append(data);
