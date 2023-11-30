@@ -4,13 +4,14 @@
 ?>
 <?use \Bitrix\Main\Localization\Loc;?>
 
-<div id='myBodyTest'>
+<div id='myBodyTest'></div>
 <?
-echo "<pre>";
+// echo "<pre>";
 // print_r($arParams);
 // print_r($arResult);
+// print_r($propInfo);
 
-echo "</pre>";
+// echo "</pre>";
 $_SESSION["params"] = $arParams;
 ?>
 <div class="basket_props_block" id="bx_basket_div_<?=$arResult["ID"];?>" style="display: none;">
@@ -824,39 +825,18 @@ $iCountProps = count($arResult['DISPLAY_PROPERTIES']) + $offerPropCount;
 							<?
 							$similarProducts = $arResult['PROPERTIES']['SIMILAR_PRODUCT']['VALUE'];
 							$infoBlockId = CIBlock::GetList([], ['=CODE' => 'aspro_max_catalog'])->fetch()['ID'];
-							echo"<pre>";
-
-
 							$res = CIBlockElement::GetByID(621);
 
-							while($ar_fields = $res->GetNext())
-							{
-								// print_r($ar_fields);
-							}
+
 
 							foreach ($similarProducts as $product)
 							{
 								$color = CIBlockElement::GetProperty($infoBlockId, $product, ["sort" => "asc"]  ,['CODE' => 'COLOR_REF2'])->Fetch()['VALUE'];
-								
-								// $color = CIBlockElement::GetProperty($infoBlockId, $product, ["sort" => "asc"]  ,[]);
-								
-								// while ($ch = $color->fetch()){
-								// 	print_r($ch);
-								// }
-								// print_r($color);
-								echo"</pre>";
-
+							
 								?>
 									<button onclick = 'replacementItem("/catalog/elektronika/telefony/<?=$product?>/?clear_cache=Y")'><?=$color . "<br>"?></button>
 								<?;
 							}
-							print_r($arResult['PRICES']['BASE']['VALUE_VAT'] = 50000);
-
-							echo "<pre>";
-							print_r($arResult['PRICES']['BASE']['VALUE_VAT']);
-
-							// print_r($arResult);
-							echo "</pre>";
 							?>
 						</div>
 					<?endif;?>
@@ -1163,7 +1143,7 @@ $iCountProps = count($arResult['DISPLAY_PROPERTIES']) + $offerPropCount;
 							<?$this->SetViewTarget('PRODUCT_SIDE_INFO', 900);?>
 								<?if($arResult['BRAND_ITEM']):?>
 									<div class="brand-detail">
-									?>
+							
 										<div class="brand-detail-info bordered rounded3">
 											<?if($arResult['BRAND_ITEM']["IMAGE"]):?>
 												<div class="brand-detail-info__image"><a href="<?=$arResult['BRAND_ITEM']["DETAIL_PAGE_URL"];?>"><img src="<?=$arResult['BRAND_ITEM']["IMAGE"]["src"];?>" alt="<?=$arResult['BRAND_ITEM']["NAME"];?>" title="<?=$arResult['BRAND_ITEM']["NAME"];?>" itemprop="image"></a></div>
@@ -1764,7 +1744,6 @@ if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' &
 
 ?>
 </div>
-</div>
 
 
 
@@ -1772,7 +1751,7 @@ if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' &
 
 <script>
 	function replacementItem(urlItem){
-		urlItem = 'http://gunko.3jz.ru/catalog/elektronika/telefony/1077/'
+		urlItem = 'http://gunko.bitrix/testkomponent.php'
 		console.log(urlItem);
 		$.ajax({
     url: urlItem,         /* Куда отправить запрос */
@@ -1780,7 +1759,7 @@ if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' &
     dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */    /* Данные передаваемые в массиве */
     success: function(data){   /* функция которая будет выполнена после успешного запроса.  */
 	     console.log(data);
-		 $("#myBodyTest").append(data)
+		//  $("#myBodyTest").append(data);
 		//  $('#myBodyTest').empty()
 
 		//  $('#myBodyTest').append(data);
