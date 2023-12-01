@@ -189,14 +189,21 @@ function addInformationCompany(string &$event,string &$lid,array &$arFields,stri
 AddEventHandler("sale", "OnSalePayOrder", "accrualOfBonuses");
 
 function accrualOfBonuses($id, $val){
+    $propertiesOrder = \Bitrix\Sale\Order::getList(
+        [
+        'select' => ['*'],
+        'filter' => [
+            'ID' => 26, 
+        ]
+        ]
+        )->fetch();
     if ($val == 'Y'){
-        $dbRes = \Bitrix\Sale\PropertyValueCollection::getList([
-            'select' => ['*'],
-            'filter' => [
-                '=ORDER_ID' => $id, 
-            ]
-        ]);
-        logWrite($dbRes);
+        if($propertiesOrder["STATUS_ID"] == "F" or  $propertiesOrder["STATUS_ID"] == "P"){
+            
+        }
+    }
+    if ($val == "N"){
+
     }
 
 }
