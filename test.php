@@ -1,13 +1,32 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
 <?
-$test = new MyTable();
 echo "<pre>";
+// $dbRes = \Bitrix\Sale\PropertyValueCollection::getList([
+// 	'select' => ['*'],
+// 	'filter' => [
+// 		'=ORDER_ID' => 26, 
+// 	]
+// ]);
+// while ($item = $dbRes->fetch())
+// {
+// 	print_r($item);
+// }
 
-print_r("тут текст главной ветки");
+// $dbRes = \Bitrix\Sale\Order::getList([
+// 	'select' => ['*'],
+// 	'filter' => [
+// 		'ID' => 26, 
+// 	]
+// ]);
+// $item = $dbRes->fetch();
+// // while ($item = $dbRes->fetch())
+// // {
+// 	print_r($item);
+// // }
 
-print_r("тут новый текст новой ветки");
 
+CSaleStatus::GetByID()
 echo "</pre>";
 
 ?>

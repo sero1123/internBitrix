@@ -118,7 +118,6 @@ function addInformationCompany(string &$event,string &$lid,array &$arFields,stri
 {
     $order = \Bitrix\Sale\Order::load($arFields['ORDER_ID']);
     $userId = $order->getField('USER_ID');
-    logWrite(isTheUserAb2bBuyerById($userId));
 
     if($event == 'SALE_STATUS_CHANGED_P') #оплачен формируется к отправке
     {
@@ -185,6 +184,21 @@ function addInformationCompany(string &$event,string &$lid,array &$arFields,stri
 
         }
     }
+}
+
+AddEventHandler("sale", "OnSalePayOrder", "accrualOfBonuses");
+
+function accrualOfBonuses($id, $val){
+    if ($val == 'Y'){
+        $dbRes = \Bitrix\Sale\PropertyValueCollection::getList([
+            'select' => ['*'],
+            'filter' => [
+                '=ORDER_ID' => $id, 
+            ]
+        ]);
+        logWrite($dbRes);
+    }
+
 }
 
 
