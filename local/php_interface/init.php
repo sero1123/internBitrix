@@ -2,7 +2,11 @@
 CModule::AddAutoloadClasses('', [
     "itemsManipulation" => "/local/php_interface/classes/classItems.php",
     "lib\ProductsTable" => "/local/php_interface/classes/ProductsTable.php",
-    'MyTable' => "/local/php_interface/classes/MyTable.php"
+    'MyTable' => "/local/php_interface/classes/MyTable.php",
+    'BonusSistem' => "/local/php_interface/classes/BonusSistem.php",
+    'CreatingAPromo' => "/local/php_interface/classes/CreatingAPromo.php",
+    'CheckingPromo' => "/local/php_interface/classes/CheckingPromo.php",
+
 ]);
 
 

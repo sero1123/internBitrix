@@ -1,1 +1,3 @@
-'jhjjksnkcls'
+array (
+  'PRICE' => '9320.0000',
+)

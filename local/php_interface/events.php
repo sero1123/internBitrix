@@ -1,5 +1,9 @@
 <?
 use Bitrix\Main\Mail\Event;
+use Bitrix\Highloadblock\HighloadBlockTable as HL;
+use Bitrix\Main\Entity;
+use \Bitrix\Sale\Internals\DiscountCouponTable as Coupon;
+
 AddEventHandler("iblock", "OnBeforeIBlockElementAdd", Array("addItems", "OnBeforeIBlockElementAdd"));
 
 class addItems
@@ -52,8 +56,6 @@ AddEventHandler("main", "OnEpilog", "MyOnEpilog", 50);
 function MyOnEpilog()
 {
     global $APPLICATION;
-    // echo ($APPLICATION->GetCurPage(false));
-
     if($APPLICATION->GetCurPage(false) === '/')
     {
         if ( 9 <= date("h") &&  date("h") < 18)
@@ -116,8 +118,6 @@ function changeInPayerTypes($order, &$arUserResult, $request, &$arParams, &$arRe
 AddEventHandler('main', 'OnBeforeEventAdd', "addInformationCompany");
 function addInformationCompany(string &$event,string &$lid,array &$arFields,string &$message_id,array &$files,string $languageId = '')
 {
-    $order = \Bitrix\Sale\Order::load($arFields['ORDER_ID']);
-    $userId = $order->getField('USER_ID');
 
     if($event == 'SALE_STATUS_CHANGED_P') #оплачен формируется к отправке
     {
@@ -186,27 +186,50 @@ function addInformationCompany(string &$event,string &$lid,array &$arFields,stri
     }
 }
 
-AddEventHandler("sale", "OnSalePayOrder", "accrualOfBonuses");
-
-function accrualOfBonuses($id, $val){
-    $propertiesOrder = \Bitrix\Sale\Order::getList(
-        [
-        'select' => ['*'],
-        'filter' => [
-            'ID' => 26, 
-        ]
-        ]
-        )->fetch();
-    if ($val == 'Y'){
-        if($propertiesOrder["STATUS_ID"] == "F" or  $propertiesOrder["STATUS_ID"] == "P"){
-            
-        }
-    }
-    if ($val == "N"){
-
-    }
-
+AddEventHandler('main', 'OnAfterUserRegister', "createCoupon");
+function createCoupon(&$arFields)
+{
+    $promoObject = new CreatingAPromo;
+    $promoObject->creating($arFields['USER_ID']);
 }
 
+AddEventHandler('sale', 'OnAfterSaleOrderFinalAction', "checkingPromoOrder");
+function checkingPromoOrder($event)
+{
+    $test = new CheckingPromo();
+    $test->checking($event);
+}
+
+AddEventHandler('sale', 'OnSalePayOrder', "couponAction");
+
+function couponAction(int $orderId, string $isPay)
+{
+    if($isPay == 'Y')
+    {
+        $couponList = \Bitrix\Sale\Internals\OrderCouponsTable::getList(array(
+            'select' => array('COUPON'),
+            'filter' => array('=ORDER_ID' => $orderId)
+        ));
+
+        $promoHl = HL::getList([
+            'filter' => ['=NAME' => 'Promo'],
+        ])->fetch();
+
+        $promoObject = HL::compileEntity($promoHl);
+        $PromoDataClass = $promoObject->getDataClass();
+        while($coupon = $couponList->fetch())
+        {
+            if ($userId = $PromoDataClass::getList
+                ([
+                    "select" => ["*"],
+                    "order" => ["ID" => "ASC"],
+                    'filter' => ['UF_PROMO' => $coupon['COUPON']]
+                ])->fetch()['UF_USER_ID'])
+            {
+                CSaleUserAccount::UpdateAccount($userId, REFERAL_BONUS, 'RUB');
+            }
+        }
+    }
+}
 
 ?>
