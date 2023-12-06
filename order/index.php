@@ -3,10 +3,10 @@ $APPLICATION->SetTitle("Оформление заказа");
 ?>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:sale.order.ajax",
-	"v2",
+	"bitrix:sale.order.ajax", 
+	"v2", 
 	array(
-		"PAY_FROM_ACCOUNT" => "N",
+		"PAY_FROM_ACCOUNT" => "Y",
 		"ONLY_FULL_PAY_FROM_ACCOUNT" => "N",
 		"COUNT_DELIVERY_TAX" => "Y",
 		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
@@ -31,7 +31,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"DISABLE_BASKET_REDIRECT" => "N",
 		"DISPLAY_IMG_WIDTH" => "90",
 		"DISPLAY_IMG_HEIGHT" => "90",
-		"COMPONENT_TEMPLATE" => "v1",
+		"COMPONENT_TEMPLATE" => "v2",
 		"ALLOW_NEW_PROFILE" => "Y",
 		"SHOW_PAYMENT_SERVICES_NAMES" => "Y",
 		"COMPATIBLE_MODE" => "Y",
@@ -152,7 +152,16 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"MESS_FAIL_PRELOAD_TEXT" => "Вы заказывали в нашем интернет-магазине, поэтому мы заполнили все данные автоматически. Обратите внимание на развернутый блок с информацией о заказе. Здесь вы можете внести необходимые изменения или оставить как есть и нажать кнопку \"#ORDER_BUTTON#\".",
 		"MESS_DELIVERY_CALC_ERROR_TITLE" => "Не удалось рассчитать стоимость доставки.",
 		"MESS_DELIVERY_CALC_ERROR_TEXT" => "Вы можете продолжить оформление заказа, а чуть позже менеджер магазина свяжется с вами и уточнит информацию по доставке.",
-		"MESS_PAY_SYSTEM_PAYABLE_ERROR" => "Вы сможете оплатить заказ после того, как менеджер проверит наличие полного комплекта товаров на складе. Сразу после проверки вы получите письмо с инструкциями по оплате. Оплатить заказ можно будет в персональном разделе сайта."
+		"MESS_PAY_SYSTEM_PAYABLE_ERROR" => "Вы сможете оплатить заказ после того, как менеджер проверит наличие полного комплекта товаров на складе. Сразу после проверки вы получите письмо с инструкциями по оплате. Оплатить заказ можно будет в персональном разделе сайта.",
+		"SHOW_COUPONS" => "Y",
+		"ADDITIONAL_PICT_PROP_2" => "-",
+		"ADDITIONAL_PICT_PROP_3" => "-",
+		"ADDITIONAL_PICT_PROP_5" => "-",
+		"ADDITIONAL_PICT_PROP_28" => "-",
+		"ADDITIONAL_PICT_PROP_32" => "-",
+		"ADDITIONAL_PICT_PROP_34" => "-",
+		"ADDITIONAL_PICT_PROP_42" => "-",
+		"MESS_MORE_DETAILS" => "Подробнее"
 	),
 	false
 );?>
