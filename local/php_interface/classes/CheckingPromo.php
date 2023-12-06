@@ -22,6 +22,11 @@ class CheckingPromo
 
     }
 
+/**
+ * Получает промо-код для текущего пользователя.
+ *
+ * @return string Промо-код для текущего пользователя.
+ */
     private function getPromo(): string
     {
         $promoHl = HL::getList([
@@ -37,6 +42,10 @@ class CheckingPromo
             "order" => ["ID" => "ASC"],
             'filter' => ['UF_USER_ID' => $USER->getID()]
         ]);
+        if (!$promo->fetch())
+        {
+            return false;
+        }
         return $promo->fetch()['UF_PROMO'];
     }
 }
